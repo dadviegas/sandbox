@@ -1,0 +1,16 @@
+{
+  "name": "web",
+  "version": "1.0.0",
+  "description": "testing environment",
+  "main": "index.js",
+  "repository": "git@github.com:dadviegas/sandbox.git",
+  "author": "David Viegas <dadviegas@hotmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "core-base-setup": "1.0.0",
+    "core-webpack-setup": "1.0.0"
+  },
+  "scripts": {
+    "build": "webpack --mode production"
+  }
+}
