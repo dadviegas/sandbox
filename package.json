@@ -1,0 +1,9 @@
+{
+  "name": "sandbox",
+  "version": "1.0.0",
+  "description": "Frontend sandbox testing environment",
+  "main": "index.js",
+  "repository": "git@github.com:dadviegas/sandbox.git",
+  "author": "David Viegas <dadviegas@hotmail.com>",
+  "license": "MIT"
+}
