@@ -15,6 +15,7 @@ module.exports = (api) => {
       extends: './core/babel.config.js',
     },
   ];
+
   return {
     overrides,
     presets,
