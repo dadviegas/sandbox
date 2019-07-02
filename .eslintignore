@@ -1,0 +1,8 @@
+coverage/
+internals/
+node_modules/
+dist/
+bin/
+backup/
+chrome/
+testreports/

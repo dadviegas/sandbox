@@ -1,7 +1,15 @@
 module.exports = (api) => {
   api.cache(true);
 
+  const presets = [
+    '@babel/preset-env',
+  ];
+  const plugins = [];
+  const overrides = [];
+
   return {
-    extends: '../babel.config.js',
+    overrides,
+    presets,
+    plugins,
   };
 };

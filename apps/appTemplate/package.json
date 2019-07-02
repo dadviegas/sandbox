@@ -1,5 +1,5 @@
 {
-  "name": "web",
+  "name": "app-template",
   "version": "1.0.0",
   "description": "testing environment",
   "main": "index.js",
@@ -8,11 +8,9 @@
   "license": "MIT",
   "devDependencies": {
     "core-base-setup": "1.0.0",
-    "core-webpack-setup": "1.0.0",
-    "core-react": "1.0.0"
+    "core-webpack-setup": "1.0.0"
   },
   "scripts": {
-    "build": "webpack --mode production",
-    "start": "webpack-dev-server"
+    "build": "webpack --mode production"
   }
 }
