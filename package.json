@@ -5,5 +5,23 @@
   "main": "index.js",
   "repository": "git@github.com:dadviegas/sandbox.git",
   "author": "David Viegas <dadviegas@hotmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "core/*"
+  ],
+  "scripts": {
+    "clean": "find . -name 'node_modules' -exec rm -rf '{}' +",
+    "start": "babel-node ./index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint:eslint": "eslint",
+    "lint:js": "yarn lint:eslint . ",
+    "lint:fix": "yarn lint:js --fix"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "test": "1.0.0",
+    "core-base-setup": "1.0.0"
+  }
 }
