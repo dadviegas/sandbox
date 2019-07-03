@@ -1,12 +1,54 @@
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+const autoprefixer = require('autoprefixer');
 
-export default (env, params) => {
+const getPath = (...args) => path.join(...args);
+
+const rootPath = process.cwd();
+
+const baseConfig = {
+  rootPath,
+  stats: undefined,
+};
+
+export default (env, params, config = baseConfig) => {
+  const isProduction = process.env.NODE_ENV !== 'production';
+
   return {
+    optimization: {
+      moduleIds: 'hashed',
+      namedChunks: isProduction,
+      namedModules: isProduction,
+      minimize: isProduction,
+      runtimeChunk: {
+        name: entrypoint => `runtime_${entrypoint.name}`,
+      },
+      splitChunks: {
+        cacheGroups: {
+          vendor: {
+            chunks: 'initial',
+            name: 'vendor',
+            test: /node_modules/,
+            enforce: true,
+          },
+          // styles: {
+          //   name: 'styles',
+          //   test: /\.s?css$/,
+          //   chunks: 'all',
+          //   enforce: true,
+          // },
+        },
+      },
+    },
     plugins: [
       new HtmlWebpackPlugin({
         title: 'Custom template',
-        template: path.join(__dirname, 'html/index.template.html'),
+        template: getPath(config.rootPath, 'html/index.template.html'),
+      }),
+      new MiniCssExtractPlugin({
+        filename: '[name].css',
+        chunkFilename: '[name]_[id].css',
       }),
     ],
     module: {
@@ -23,15 +65,45 @@ export default (env, params) => {
           use: [
             {
               loader: 'html-loader',
+              options: { minimize: true },
             },
           ],
+        },
+        {
+          test: /\.s?css$/,
+          use: [
+            {
+              loader: MiniCssExtractPlugin.loader,
+              options: {
+                hmr: isProduction,
+                reloadAll: true,
+              },
+            },
+            {
+              loader: 'css-loader',
+              options: {
+                modules: {
+                  localIdentName: '[name]__[local]--[hash:base64:5]',
+                },
+                importLoaders: 1,
+              },
+            },
+            {
+              loader: 'postcss-loader',
+              query: { plugins: [autoprefixer] },
+            },
+            {
+              loader: 'sass-loader',
+            },
+          ].filter(n => n),
         },
       ],
     },
     devServer: {
-      contentBase: path.join(__dirname, 'dist'),
+      contentBase: getPath(config.rootPath, 'dist'),
       compress: true,
       port: 8081,
     },
+    stats: config.stats,
   };
 };

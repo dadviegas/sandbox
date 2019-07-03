@@ -1,0 +1,14 @@
+@import './reset.scss';
+@import './theme.scss';
+@import './sizes.scss';
+
+
+html, body {
+  @extend .fullscreen;
+  background: #333;
+  color: white;
+}
+
+#root {
+  @extend .fullscreen;
+}
