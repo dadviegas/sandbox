@@ -21,7 +21,7 @@ class App extends Component {
       <AppContext.Consumer>
         {context => (
           <section id="theme-background" className={context.theme.value}>
-            <select onChange={context.themeSelect}>
+            <select className="select-css" onChange={context.themeSelect}>
               {
                 context.themes.map(theme => <option value={theme.value}>{theme.name}</option>)
               }
