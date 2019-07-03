@@ -1,10 +1,10 @@
 module.exports = (api) => {
-  console.log(2)
   api.cache(true);
 
   const presets = [
     ['@babel/preset-env'],
   ];
+
   const plugins = [];
   const overrides = [
     {
