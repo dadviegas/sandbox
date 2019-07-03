@@ -1,0 +1,17 @@
+{
+  "name": "asgard-local-ip",
+  "version": "1.0.13",
+  "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
+  "author": "dadviegas",
+  "license": "MIT",
+  "scripts": {
+    "compile": "yarn build",
+    "build": "babel src --out-dir lib"
+  },
+  "dependencies": {
+    "core-base-setup": "1.0.0"
+  }
+}

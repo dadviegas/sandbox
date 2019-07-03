@@ -1,0 +1,20 @@
+{
+  "name": "asgard-yaml-config",
+  "version": "1.0.13",
+  "author": "dadviegas",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "compile": "yarn build",
+    "build": "babel src --out-dir lib",
+    "start": "babel-node ./example"
+  },
+  "dependencies": {
+    "core-base-setup": "1.0.0",
+    "deepmerge": "^2.2.1",
+    "js-yaml": "^3.12.0"
+  }
+}
