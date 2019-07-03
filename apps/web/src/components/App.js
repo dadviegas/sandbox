@@ -20,7 +20,12 @@ class App extends Component {
     return (
       <AppContext.Consumer>
         {context => (
-          <section id="theme-background" className={context.theme}>
+          <section id="theme-background" className={context.theme.value}>
+            <select onChange={context.themeSelect}>
+              {
+                context.themes.map(theme => <option value={theme.value}>{theme.name}</option>)
+              }
+            </select>
             <Wrapper>
               <Title>
                 test asdsa
