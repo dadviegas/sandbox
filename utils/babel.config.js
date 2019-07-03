@@ -4,12 +4,16 @@ module.exports = (api) => {
   const presets = [
     ['@babel/preset-env'],
   ];
-  const plugins = [];
+
+  const plugins = [
+    ['@babel/plugin-proposal-class-properties'],
+  ];
   const overrides = [];
 
   return {
     overrides,
     presets,
     plugins,
+    ignore: ['**/*.test.js'],
   };
 };

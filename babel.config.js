@@ -1,4 +1,5 @@
 module.exports = (api) => {
+  console.log(2)
   api.cache(true);
 
   const presets = [
@@ -13,6 +14,14 @@ module.exports = (api) => {
     {
       test: 'core/*',
       extends: './core/babel.config.js',
+    },
+    {
+      test: 'apps/*',
+      extends: './apps/babel.config.js',
+    },
+    {
+      test: 'utils/*',
+      extends: './utils/babel.config.js',
     },
   ];
 

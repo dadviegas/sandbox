@@ -1,0 +1,33 @@
+{
+  "name": "asgard-middleware",
+  "version": "1.0.13",
+  "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "compile": "yarn build",
+    "build": "babel --root-mode upward src --out-dir lib",
+    "test": "NODE_ENV=test jest"
+  },
+  "dependencies": {
+    "core-base-setup": "1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dadviegas/ft-builder.git"
+  },
+  "author": "dadviegas",
+  "bugs": {
+    "url": "https://github.com/dadviegas/ft-builder/issues"
+  },
+  "jest": {
+    "verbose": true,
+    "transform": {
+      ".*": "./babel-transform.js"
+    },
+    "transformIgnorePatterns": [
+      "/node_modules/(?!@babel\/runtime)"
+    ]
+  }
+}
