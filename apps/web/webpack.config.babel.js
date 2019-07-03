@@ -1,7 +1,7 @@
-import WebpackConfGen from 'core-webpack-setup';
+import webpackConfGen from 'core-webpack-setup';
 
 const baseConfig = {
   rootPath: __dirname,
 };
 
-export default (env, params) => WebpackConfGen(env, params, baseConfig);
+export default webpackConfGen(baseConfig);

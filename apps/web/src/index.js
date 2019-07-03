@@ -6,6 +6,17 @@ import App from './components/Main/App';
 import '../styles/core.scss';
 
 // eslint-disable-next-line no-undef
-const wrapper = window.document.getElementById('root');
+const node = elementId => window.document.getElementById(elementId);
 
-ReactDOM.render(<App />, wrapper);
+const render = (Component) => {
+  ReactDOM.render(
+    <Component />,
+    node('root'),
+  );
+};
+
+if (module.hot) {
+  module.hot.accept();
+}
+
+render(App);

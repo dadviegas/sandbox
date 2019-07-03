@@ -28,7 +28,8 @@ const baseConfig = {
   },
 };
 
-export default (env, params, config = baseConfig) => {
+// eslint-disable-next-line no-unused-vars
+export default (env, params) => (config = baseConfig) => {
   const isProduction = process.env.NODE_ENV !== 'production';
 
   return {

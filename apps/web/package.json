@@ -2,7 +2,6 @@
   "name": "web",
   "version": "1.0.0",
   "description": "testing environment",
-  "main": "index.js",
   "repository": "git@github.com:dadviegas/sandbox.git",
   "author": "David Viegas <dadviegas@hotmail.com>",
   "license": "MIT",
@@ -12,7 +11,7 @@
     "core-react": "1.0.0"
   },
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server --hot --inline",
     "dev": "webpack --mode development",
     "build": "webpack --mode production"
   }
