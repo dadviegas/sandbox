@@ -1,12 +1,24 @@
 module.exports = (api) => {
-  api.cache(true);
+  const babelEnv = api.env();
+
+  const isProduction = babelEnv === 'production';
 
   const presets = [
     ['@babel/preset-env'], '@babel/preset-react',
   ];
+
   const plugins = [
     '@babel/plugin-proposal-class-properties',
   ];
+
+  if (isProduction) {
+    plugins.push(
+      'transform-react-remove-prop-types',
+      '@babel/plugin-transform-react-constant-elements',
+      '@babel/plugin-transform-react-inline-elements',
+    );
+  }
+
   const overrides = [];
 
   return {

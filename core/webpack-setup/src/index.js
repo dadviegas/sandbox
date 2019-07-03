@@ -1,7 +1,9 @@
 import path from 'path';
+import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-const autoprefixer = require('autoprefixer');
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import autoprefixer from 'autoprefixer';
 
 const getPath = (...args) => path.join(...args);
 
@@ -30,7 +32,8 @@ const baseConfig = {
 
 // eslint-disable-next-line no-unused-vars
 export default (env, params) => (config = baseConfig) => {
-  const isProduction = process.env.NODE_ENV !== 'production';
+  const environment = env.mode || 'development';
+  const isProduction = environment !== 'production';
 
   return {
     watchOptions: {
@@ -62,6 +65,8 @@ export default (env, params) => (config = baseConfig) => {
       },
     },
     plugins: [
+      new webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify(environment) }),
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Custom template',
         template: getPath(config.rootPath, 'html/index.template.html'),
@@ -102,9 +107,9 @@ export default (env, params) => (config = baseConfig) => {
             {
               loader: 'css-loader',
               options: {
-                modules: {
-                  localIdentName: '[name]__[local]--[hash:base64:5]',
-                },
+                // modules: {
+                //   localIdentName: '[name]__[local]--[hash:base64:5]',
+                // },
                 importLoaders: 1,
               },
             },
@@ -115,7 +120,7 @@ export default (env, params) => (config = baseConfig) => {
             {
               loader: 'sass-loader',
             },
-          ].filter(n => n),
+          ],
         },
       ],
     },

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import App from './components/Main/App';
+import Route from './components/Route';
 
 import '../styles/core.scss';
 
@@ -19,4 +19,4 @@ if (module.hot) {
   module.hot.accept();
 }
 
-render(App);
+render(Route);
