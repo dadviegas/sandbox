@@ -1,0 +1,5 @@
+@import './sizes.scss';
+
+:global(#root) {
+  @extend .fullscreen;
+}

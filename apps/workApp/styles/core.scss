@@ -1,0 +1,7 @@
+@import './sizes.scss';
+
+html, body {
+  @extend .fullscreen;
+  background: #333;
+  color: white;
+}
