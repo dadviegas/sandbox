@@ -4,13 +4,23 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import autoprefixer from 'autoprefixer';
+import merge from 'merge';
 
 const getPath = (...args) => path.join(...args);
 
 const rootPath = process.cwd();
 
+export const CSS_PACKAGES = {
+  BUNDLE: 'BUNDLE',
+  CSS: 'CSS',
+};
+
 const baseConfig = {
   rootPath,
+  css: {
+    className: '[name]__[local]--[hash:base64:5]',
+    type: CSS_PACKAGES.CSS,
+  },
   stats: {
     all: false,
     modules: true,
@@ -31,9 +41,11 @@ const baseConfig = {
 };
 
 // eslint-disable-next-line no-unused-vars
-export default (env, params) => (config = baseConfig) => {
-  const environment = env.mode || 'development';
+export default (projConfig = {}) => (env = {}, params) => {
+  const environment = params.mode || 'development';
   const isProduction = environment !== 'production';
+
+  const config = merge.recursive(true, baseConfig, projConfig);
 
   return {
     watchOptions: {
@@ -73,7 +85,7 @@ export default (env, params) => (config = baseConfig) => {
       }),
       new MiniCssExtractPlugin({
         filename: '[name].css',
-        chunkFilename: '[name]_[id].css',
+        chunkFilename: '[id].css',
       }),
     ],
     module: {
@@ -90,26 +102,32 @@ export default (env, params) => (config = baseConfig) => {
           use: [
             {
               loader: 'html-loader',
-              options: { minimize: true },
+              options: { minimize: false },
             },
           ],
         },
         {
           test: /\.s?css$/,
           use: [
-            {
+            config.css.type === CSS_PACKAGES.CSS && {
               loader: MiniCssExtractPlugin.loader,
               options: {
-                hmr: isProduction,
+                hmr: !isProduction,
                 reloadAll: true,
+              },
+            },
+            config.css.type === CSS_PACKAGES.BUNDLE && {
+              loader: 'style-loader',
+              options: {
+                hmr: !isProduction,
               },
             },
             {
               loader: 'css-loader',
               options: {
-                // modules: {
-                //   localIdentName: '[name]__[local]--[hash:base64:5]',
-                // },
+                modules: {
+                  localIdentName: config.css.className,
+                },
                 importLoaders: 1,
               },
             },
@@ -120,7 +138,21 @@ export default (env, params) => (config = baseConfig) => {
             {
               loader: 'sass-loader',
             },
-          ],
+          ].filter(n => n),
+        },
+        {
+          test: /\.(svg|eot|ttf|woff|woff2)$/,
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]',
+          },
+        },
+        {
+          test: /\.(jpg|png|gif)$/,
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]',
+          },
         },
       ],
     },
