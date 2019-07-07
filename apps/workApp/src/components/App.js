@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { AppContext } from '../contexts/AppContext';
 import cn from 'classnames';
 
 import styles from '../../styles/common.scss';
@@ -21,22 +20,13 @@ const Wrapper = styled.section`
 class App extends Component {
   render() {
     return (
-      <AppContext.Consumer>
-        {context => (
-          <section className={cn(context.theme.value, styles.themeBackground)}>
-            <select className="select-css" onChange={context.themeSelect}>
-              {
-                context.themes.map(theme => <option value={theme.value}>{theme.name}</option>)
-              }
-            </select>
-            <Wrapper>
-              <Title>
-                test asdsa
-              </Title>
-            </Wrapper>
-          </section>
-        )}
-      </AppContext.Consumer>
+      <section className={cn(styles.themeBackground)}>
+        <Wrapper>
+          <Title>
+            test
+          </Title>
+        </Wrapper>
+      </section>
     );
   }
 }

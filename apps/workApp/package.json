@@ -8,7 +8,8 @@
   "devDependencies": {
     "core-base-setup": "1.0.0",
     "core-webpack-setup": "1.0.0",
-    "core-react": "1.0.0"
+    "core-react": "1.0.0",
+    "core-base-redux": "1.0.0"
   },
   "scripts": {
     "start": "cross-env BABEL_ENV=development webpack-dev-server --hot --inline --env.debug",

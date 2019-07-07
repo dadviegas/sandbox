@@ -1,22 +1,35 @@
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 
-import Route from './components/Route';
+import Route from './app/Route';
+import configureStore from './app/store';
 
 import '../styles/main.scss';
 
+const store = configureStore();
 // eslint-disable-next-line no-undef
 const node = elementId => window.document.getElementById(elementId);
 
-const render = (Component) => {
+const render = () => {
   ReactDOM.render(
-    <Component />,
+    <Provider store={store}>
+      <Route />
+    </Provider>,
     node('root'),
   );
 };
 
 if (module.hot) {
-  module.hot.accept();
+  // Support hot reloading of components.
+  // Whenever the App component file or one of its dependencies
+  // is changed, re-import the updated component and re-render it
+  module.hot.accept('./app/Route', () => {
+    setTimeout(render);
+  });
 }
 
-render(Route);
+render();

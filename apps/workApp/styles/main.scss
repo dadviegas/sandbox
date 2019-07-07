@@ -1,6 +1,11 @@
-@import './reset.scss';
+:global {
+  @import './fonts.scss';  
+  @import './global.scss';
+  @import './reset.scss';
+}
+
 @import './core.scss';
 @import './theme.scss';
 @import './sizes.scss';
 @import './common.scss';
-@import './global.scss';
+
