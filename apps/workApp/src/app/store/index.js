@@ -48,7 +48,8 @@ export default function configureStore(preloadedState = {}) {
         sagaTask.cancel();
         sagaTask.toPromise.then(() => {
           sagaTask = sagaMiddleware.run(function* replacedSaga() {
-            yield getNewSagas();
+            const flattenSagas = flatten(getNewSagas);
+            yield all(flattenSagas.map(fork));
           });
         });
       });
