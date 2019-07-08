@@ -1,11 +1,9 @@
 import { combineReducers } from 'redux';
-import { connectRouter } from 'connected-react-router'
+import { connectRouter } from 'connected-react-router';
 
-const reducer = (state = 1, { type, payload }) => {
-  return state;
-};
+import { theme } from '../index';
 
 export default history => combineReducers({
   router: connectRouter(history),
-  reducer,
+  ...theme.reducers,
 });

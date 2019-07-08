@@ -2,7 +2,10 @@
   "name": "core-base-redux",
   "version": "1.0.0",
   "description": "core environment",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
   "repository": "git@github.com:dadviegas/sandbox.git",
   "author": "David Viegas <dadviegas@hotmail.com>",
   "license": "MIT",

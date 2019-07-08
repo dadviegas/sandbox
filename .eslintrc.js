@@ -23,7 +23,7 @@ module.exports = {
     "import/no-extraneous-dependencies": "off",
     "import/no-named-as-default": "off",
     "import/no-unresolved": "error",
-    "import/prefer-default-export": "off",
+    "import/prefer-default-export": "on",
     "jsx-a11y/aria-props": "error",
     "jsx-a11y/heading-has-content": "off",
     "jsx-a11y/label-has-for": "error",

@@ -18,6 +18,7 @@ export const history = createHashHistory();
 
 export default function configureStore(preloadedState = {}) {
   const sagaMiddleware = createSagaMiddleware({
+    // eslint-disable-next-line no-console
     onError: error => console.log.error(error),
   });
 
