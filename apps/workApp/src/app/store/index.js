@@ -2,29 +2,37 @@
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import createSagaMiddleware from 'redux-saga';
+import { createHashHistory } from 'history';
+import { routerMiddleware } from 'connected-react-router';
 
 import { all, fork } from 'redux-saga/effects';
 
 import sagas from '../sagas';
-import rootReducer from '../reducers';
+import createRootReducer from '../reducers';
 import middlewares from '../middlewares';
 
 // eslint-disable-next-line max-len
 const flatten = arr => arr.reduce((flat, toFlatten) => flat.concat(Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten), []);
+
+export const history = createHashHistory();
 
 export default function configureStore(preloadedState = {}) {
   const sagaMiddleware = createSagaMiddleware({
     onError: error => console.log.error(error),
   });
 
-  const middlewareEnhancer = applyMiddleware(...middlewares, sagaMiddleware);
+  const middlewareEnhancer = applyMiddleware(
+    routerMiddleware(history),
+    ...middlewares,
+    sagaMiddleware,
+  );
 
   const storeEnhancers = [middlewareEnhancer];
 
   const composedEnhancer = composeWithDevTools(...storeEnhancers);
 
   const store = createStore(
-    rootReducer,
+    createRootReducer(history),
     preloadedState,
     composedEnhancer,
   );
@@ -39,7 +47,7 @@ export default function configureStore(preloadedState = {}) {
       module.hot.accept('../reducers', () => {
         // eslint-disable-next-line global-require
         const newRootReducer = require('../reducers').default;
-        store.replaceReducer(newRootReducer);
+        store.replaceReducer(newRootReducer(history));
       });
 
       // eslint-disable-next-line no-undef

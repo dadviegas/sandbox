@@ -7,7 +7,9 @@
   "author": "David Viegas <dadviegas@hotmail.com>",
   "license": "MIT",
   "dependencies": {
+    "connected-react-router": "^6.5.0",
     "core-js": "^3.1.4",
+    "history": "^4.9.0",
     "react-redux": "^7.1.0",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.8",
