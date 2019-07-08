@@ -1,34 +1,50 @@
-.royal {
-  background: #141e30;
-  background: linear-gradient(to right, #141e30, #243b55);
+.one {
+  background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898; 
+  background-blend-mode: multiply,multiply;
 }
 
-.solidVault {
-  background: #3a7bd5;
-  background: linear-gradient(to right, #3a7bd5, #3a6073);
+.two {
+  background-image: linear-gradient(to right, #434343 0%, black 100%);
 }
 
-.fireWatch {
-  background: #cb2d3e; 
-  background: linear-gradient(to right, #ef473a, #cb2d3e);
+.three {
+  background: linear-gradient(to bottom, #323232 0%, #3F3F3F 40%, #1C1C1C 150%), linear-gradient(to top, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.25) 200%);
+  background-blend-mode: multiply;
 }
 
-.servQuick {
-  background: #485563; 
-  background: linear-gradient(to right, #29323c, #485563);
+.four {
+  background-image: linear-gradient(-225deg, #3D4E81 0%, #5753C9 48%, #6E7FF3 100%);
 }
 
-.sunrise {
-  background: #FF512F; 
-  background: linear-gradient(to right, #F09819, #FF512F);
+.carbon {
+  background:
+  linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
+  linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
+  linear-gradient(27deg, #222 5px, transparent 5px) 0px 10px,
+  linear-gradient(207deg, #222 5px, transparent 5px) 10px 5px,
+  linear-gradient(90deg, #1b1b1b 10px, transparent 10px),
+  linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
+  background-color: #131313;
+  background-size: 20px 20px;
 }
 
-.mirage {
-  background: #16222A; 
-  background: linear-gradient(to right, #3A6073, #16222A);
+.honeycomb {
+  background:
+  radial-gradient(circle farthest-side at 0% 50%,#333 23.5%,rgba(240,166,17,0) 0)21px 30px,
+  radial-gradient(circle farthest-side at 0% 50%,#B71 24%,rgba(240,166,17,0) 0)19px 30px,
+  linear-gradient(#333 14%,rgba(240,166,17,0) 0, rgba(240,166,17,0) 85%,#333 0)0 0,
+  linear-gradient(150deg,#333 24%,#B71 0,#B71 26%,rgba(240,166,17,0) 0,rgba(240,166,17,0) 74%,#B71 0,#B71 76%,#333 0)0 0,
+  linear-gradient(30deg,#333 24%,#B71 0,#B71 26%,rgba(240,166,17,0) 0,rgba(240,166,17,0) 74%,#B71 0,#B71 76%,#333 0)0 0,
+  linear-gradient(90deg,#B71 2%,#333 0,#333 98%,#B71 0%)0 0 #333;
+  background-size: 40px 60px;
 }
 
-.stellar {
-  background: #7474BF; 
-  background: linear-gradient(to right, #348AC7, #7474BF);
+.blueprintgrid {
+  background-color:#269;
+  background-image: linear-gradient(white 2px, transparent 2px),
+  linear-gradient(90deg, white 2px, transparent 2px),
+  linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px);
+  background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+  background-position:-2px -2px, -2px -2px, -1px -1px, -1px -1px;
 }

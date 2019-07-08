@@ -1,7 +1,7 @@
 import { constants } from './actions';
 
 const initialState = {
-  name: 'solidVault',
+  name: 'three',
 };
 
 export default function (state = initialState, { type, payload }) {
