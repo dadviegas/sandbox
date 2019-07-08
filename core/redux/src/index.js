@@ -1,10 +1,16 @@
 import isPlainObject from 'is-plain-object';
 
 export const logicCreator = ({
+  selectors = {},
+  actions = {},
+  constants = {},
   reducers = {},
   sagas = [],
   middlewares = [],
 }) => ({
+  selectors,
+  actions,
+  constants,
   reducers,
   sagas,
   middlewares,

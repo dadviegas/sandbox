@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import cn from 'classnames';
 
 import styles from '../../../styles/common.scss';
+import themes from '../../../styles/theme.scss';
 import Navbar from '../../components/Navbar';
 
 // Create a Title component that'll render an <h1> tag with some styles
@@ -21,7 +22,7 @@ const Wrapper = styled.section`
 class App extends PureComponent {
   render() {
     return (
-      <section className={cn(styles.themeBackground)}>
+      <section className={cn(styles.themeBackground, themes[this.props.theme])}>
         <Navbar />
         <Wrapper>
           <Title>

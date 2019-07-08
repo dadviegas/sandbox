@@ -1,10 +1,10 @@
 import { actionsObjectCreator } from 'core-base-redux';
 
-const prefix = 'theme-handler/';
+const prefix = 'theme/';
 
 const rawConstants = [
   {
-    name: 'SET_THEME', functionName: 'setTheme', prefix, callback: name => ({ name }),
+    name: 'set', functionName: 'set', prefix, callback: name => ({ name }),
   },
 ];
 

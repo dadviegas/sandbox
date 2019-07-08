@@ -19,5 +19,9 @@
     "redux-saga": "^1.0.5",
     "regenerator-runtime": "^0.13.2",
     "reselect": "^4.0.0"
+  },
+  "scripts": {
+    "compile": "yarn build",
+    "build": "babel --root-mode upward src --out-dir lib"
   }
 }
