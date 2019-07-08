@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import cn from 'classnames';
 
 import styles from '../../../styles/common.scss';
-import Navbar from '../Navbar';
+import Navbar from '../../components/Navbar';
 
 // Create a Title component that'll render an <h1> tag with some styles
 const Title = styled.h1`
