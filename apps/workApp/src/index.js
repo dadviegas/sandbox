@@ -6,11 +6,10 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
 import Route from './app/Route';
-import configureStore from './app/store';
+import store from './app/store';
 
 import '../styles/main.scss';
 
-const store = configureStore();
 // eslint-disable-next-line no-undef
 const node = elementId => window.document.getElementById(elementId);
 

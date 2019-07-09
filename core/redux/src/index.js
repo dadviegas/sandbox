@@ -1,4 +1,10 @@
 import isPlainObject from 'is-plain-object';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
+import createSagaMiddleware from 'redux-saga';
+import { connectRouter, routerMiddleware } from 'connected-react-router'
+
+import { all, fork } from 'redux-saga/effects';
 
 export const logicCreator = ({
   selectors = {},
@@ -57,30 +63,93 @@ export function actionCreator(type, payloadCreator = identity) {
 
 const addPrefixAction = ({ name, prefix = '' }) => (`${prefix}${name}`);
 
-const createActions = (rawConstants) => {
+export const actionsObjectCreator = (rawConstants) => {
   const actions = {};
+  const constants = {};
 
   rawConstants.forEach((action) => {
     const constant = addPrefixAction(action);
     // eslint-disable-next-line max-len
     actions[action.functionName] = (payload = {}) => ({ type: constant, payload: action.callback ? action.callback(payload) : payload });
-  });
-
-  return actions;
-};
-
-const createConstants = (rawConstants) => {
-  const constants = {};
-
-  rawConstants.forEach((action) => {
-    const constant = addPrefixAction(action);
     constants[action.name] = constant;
   });
 
-  return constants;
+  return { actions, constants };
 };
 
-export const actionsObjectCreator = actions => ({
-  actions: createActions(actions),
-  constants: createConstants(actions),
-});
+// eslint-disable-next-line max-len
+const flatten = arr => arr.reduce((flat, toFlatten) => flat.concat(Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten), []);
+
+export const storeInit = (elements = [], history) => {
+  const storeOptions = {
+    reducers: {},
+    sagas: [],
+    middlewares: [routerMiddleware(history)],
+  };
+
+  elements.forEach(element => {
+    storeOptions.reducers = {
+      ...storeOptions.reducers,
+      ...element.reducers,
+      router: connectRouter(history)
+    };
+
+    storeOptions.sagas = storeOptions.sagas.concat(element.sagas);
+    storeOptions.middlewares = storeOptions.middlewares.concat(element.middlewares);
+  });
+
+  return storeOptions;
+}
+
+export default function configureStore(preloadedState = {}, elements, history) {
+  const { reducers, sagas = [], middlewares = []} = storeInit(elements, history);
+
+  const sagaMiddleware = createSagaMiddleware({
+    // eslint-disable-next-line no-console
+    onError: error => console.log.error(error),
+  });
+
+  const middlewareEnhancer = applyMiddleware(
+    routerMiddleware(history),
+    ...middlewares,
+    sagaMiddleware,
+  );
+
+  const storeEnhancers = [middlewareEnhancer];
+
+  const composedEnhancer = composeWithDevTools(...storeEnhancers);
+
+  const store = createStore(
+    combineReducers(
+      reducers
+    ),
+    preloadedState,
+    composedEnhancer,
+  );
+
+  let sagaTask = sagaMiddleware.run(function* rootSaga() {
+    const flattenSagas = flatten(sagas);
+    yield all(flattenSagas.map(fork));
+  });
+
+  if (module.hot) {
+    store.replaceLogic = (elements) => {
+      const { reducers, sagas = []} = storeInit(elements, history);
+      store.replaceReducer(combineReducers(
+        reducers
+      ));
+
+      if (sagas.length) {
+        sagaTask.cancel();
+        sagaTask.toPromise.then(() => {
+          sagaTask = sagaMiddleware.run(function* replacedSaga() {
+            const flattenSagas = flatten(sagas);
+            yield all(flattenSagas.map(fork));
+          });
+        });
+      }
+    }
+  }
+
+  return store;
+}

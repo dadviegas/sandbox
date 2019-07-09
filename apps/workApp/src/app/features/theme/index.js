@@ -3,9 +3,11 @@ import theme from './reducer';
 import { actions, constants } from './actions';
 import * as selectors from './selectors';
 
-export default logicCreator({
+const feature = logicCreator({
   selectors,
   actions,
   constants,
   reducers: { theme },
 });
+
+export default feature;

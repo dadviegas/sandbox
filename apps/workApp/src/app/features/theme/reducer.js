@@ -1,20 +1,19 @@
-import { constants } from './actions';
+import { constants as theme } from './actions';
 
 const initialState = {
-  name: 'three',
+  name: 'two',
 };
 
+const map = {
+  [theme.set]: (state, payload) => ({
+    ...state,
+    theme: {
+      name: payload.theme,
+    },
+  }),
+}
+
 export default function (state = initialState, { type, payload }) {
-  switch (type) {
-    case constants.SET_THEME: {
-      return {
-        ...state,
-        theme: {
-          name: payload.theme,
-        },
-      };
-    }
-    default:
-      return state;
-  }
+  const reducer = map[type];
+  return reducer && reducer(state, payload) || state
 }
