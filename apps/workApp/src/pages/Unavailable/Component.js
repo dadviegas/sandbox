@@ -7,7 +7,7 @@ class App extends PureComponent {
     return (
       <>
         <Navbar />
-        {this.props.location.pathname}
+        This Page is not available.
       </>
     );
   }
