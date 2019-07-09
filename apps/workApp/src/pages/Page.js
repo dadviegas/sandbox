@@ -6,8 +6,6 @@ import themes from '../../styles/theme.scss';
 
 function Page({
   children,
-  color,
-  background,
   location: {
     state,
   },
@@ -22,10 +20,6 @@ function Page({
   return (
     <section
       className={cx}
-      style={{
-        color,
-        background,
-      }}
     >
       <div className="page__inner">
         {children}
@@ -38,11 +32,6 @@ Page.propTypes = {
   children: PropTypes.node.isRequired,
   color: PropTypes.string,
   background: PropTypes.string,
-};
-
-Page.defaultProps = {
-  color: '#fff',
-  background: 'transparent',
 };
 
 export default withRouter(Page);

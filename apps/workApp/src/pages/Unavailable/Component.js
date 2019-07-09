@@ -5,7 +5,7 @@ import Page from '../Page';
 class App extends PureComponent {
   render() {
     return (
-      <Page>
+      <Page theme={'carbon'}>
         <h1>Page not found</h1>
       </Page>
     );
