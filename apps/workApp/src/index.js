@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 
 import Route from './app/Route';
 import store from './app/store';
-
+import routes from './routes';
 import '../styles/main.scss';
 
 // eslint-disable-next-line no-undef
@@ -16,7 +16,7 @@ const node = elementId => window.document.getElementById(elementId);
 const render = () => {
   ReactDOM.render(
     <Provider store={store}>
-      <Route />
+      <Route routes={routes} />
     </Provider>,
     node('root'),
   );

@@ -1,14 +1,13 @@
 import React, { PureComponent } from 'react';
-import Navbar from '../../components/Navbar';
+import Page from '../Page';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class App extends PureComponent {
   render() {
     return (
-      <>
-        <Navbar />
-        This Page is not available.
-      </>
+      <Page>
+        <h1>Page not found</h1>
+      </Page>
     );
   }
 }

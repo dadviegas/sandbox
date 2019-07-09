@@ -2,29 +2,52 @@ import React from 'react';
 import { ConnectedRouter } from 'connected-react-router';
 import { Route, Switch } from 'react-router';
 import { history } from './store';
+
+import {
+  CSSTransition,
+  TransitionGroup
+} from 'react-transition-group';
+
 import Home from '../pages/Home';
 import Splash from '../pages/Splash';
 import Unavailable from '../pages/Unavailable';
 
 import Main from '../masterPage/Main';
 
-const App = (props) => {
-  const locationKey = props.location.pathname
-
-  return (
-    <Main>
-      <Switch>
-        <Route path="/home" component={Home} />
-        <Route path="/about" component={Home} />
-        <Route exact path="/" component={Splash} />
-        <Route component={Unavailable} />
-      </Switch>
-    </Main>
-  )
-}
-
-export default () => (
+export default ({ routes }) => (
   <ConnectedRouter history={history}>
-    <Route path="/" component={App} />
+    <Main>
+      <Route
+          render={({ location }) => {
+            const { pathname } = location;
+            return (
+              <TransitionGroup>
+                <CSSTransition
+                  key={pathname}
+                  classNames="page"
+                  timeout={{
+                    enter: 2000,
+                    exit: 1000,
+                  }}
+                >
+                  <Route
+                    location={location}
+                    render={() => (
+                      <Switch>
+                        {
+                          routes.map((route) => {
+                            const { key, path, Component, props = {} } = route;
+                            return <Route key={key} component={Component} {...props}/>
+                          })
+                        }
+                      </Switch>
+                    )}
+                  />
+                </CSSTransition>
+              </TransitionGroup>
+            );
+          }}
+        />
+    </Main>
   </ConnectedRouter>
 );

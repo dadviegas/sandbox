@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import cn from 'classnames';
-import { CSSTransition, TransitionGroup } from 'react-transition-group'
+import Header from '../../components/Header';
 
 import styles from '../../../styles/common.scss';
 import themes from '../../../styles/theme.scss';
@@ -11,9 +11,12 @@ class App extends PureComponent {
     const { children, className } = this.props;
 
     return (
-      <section className={cn(styles.themeBackground, themes[this.props.theme])}>
-        {children}
-      </section>
+      <>
+        <section className={cn(styles.themeBackground, themes[this.props.theme])}>
+        <Header />
+          {children}
+        </section>
+      </>
     );
   }
 }

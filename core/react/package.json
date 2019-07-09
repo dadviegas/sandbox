@@ -17,11 +17,13 @@
     "postcss-loader": "^3.0.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
+    "react-anime": "^2.2.0",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
     "react-transition-group": "^4.2.1",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
-    "styled-components": "^4.3.2"
+    "styled-components": "^4.3.2",
+    "tachyons-sass": "^4.9.5"
   }
 }
