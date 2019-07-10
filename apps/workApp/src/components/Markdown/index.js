@@ -66,12 +66,11 @@ export class MarkdownGen extends Component {
 }
 
 export default class Markdown extends React.Component {
-    render() {
-      const { markdownFile } = this.props
-      const md = require('./file.md').default;
+  render() {
+    const { value } = this.props
 
-      return (
-        <MarkdownGen source={md} />
-      )
-    }
+    return (
+      <MarkdownGen source={value} />
+    )
   }
+}

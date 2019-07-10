@@ -5,6 +5,8 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import autoprefixer from 'autoprefixer';
 import merge from 'merge';
+import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
+import ManifestPlugin from 'webpack-manifest-plugin';
 
 const getPath = (...args) => path.join(...args);
 
@@ -43,15 +45,18 @@ const baseConfig = {
 // eslint-disable-next-line no-unused-vars
 export default (projConfig = {}) => (env = {}, params) => {
   const environment = params.mode || 'development';
-  const isProduction = environment !== 'production';
+  const isProduction = environment === 'production';
 
   const config = merge.recursive(true, baseConfig, projConfig);
 
   return {
+    mode: environment,
     watchOptions: {
       ignored: /node_modules/,
     },
     optimization: {
+      nodeEnv: environment,
+      // minimizer: [isProduction && new UglifyJsPlugin()].filter(n => n),
       moduleIds: 'hashed',
       namedChunks: isProduction,
       namedModules: isProduction,
@@ -60,13 +65,7 @@ export default (projConfig = {}) => (env = {}, params) => {
         name: entrypoint => `runtime_${entrypoint.name}`,
       },
       splitChunks: {
-        cacheGroups: {
-          commons: {
-            test: /[\\/]node_modules[\\/]/,
-            name: 'vendors',
-            chunks: 'all'
-          }
-        }
+        chunks: 'all'
       },
     },
     plugins: [

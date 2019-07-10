@@ -4,6 +4,8 @@ import Markdown from '../../components/Markdown';
 // eslint-disable-next-line react/prefer-stateless-function
 class App extends PureComponent {
   render() {
+    const md = require('./file.md').default;
+
     return (
       <Page theme={'one'}>
         <h1>Home</h1>
@@ -14,7 +16,7 @@ class App extends PureComponent {
         <p>Gingerbread candy gingerbread dessert icing oat cake bonbon. Carrot cake jujubes halvah candy jelly beans sugar plum chocolate bar. Cotton candy carrot cake pudding carrot cake powder. Brownie toffee topping jujubes.</p>
         <p>Cotton candy apple pie soufflé jelly-o pudding chocolate cake carrot cake. Dessert croissant carrot cake gummi bears donut icing cookie. Dessert chocolate cake pastry toffee tiramisu cookie.</p>
 
-        <Markdown />
+        <Markdown value={md} />
       </Page>
     );
   }
