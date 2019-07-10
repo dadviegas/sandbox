@@ -3,7 +3,7 @@ import Anime from 'react-anime';
 import Page from '../Page';
 
 const App = (props) => (
-  <Anime key={'notCool' + Date.now()} opacity={[0, 1]} translateY={'1em'} delay={(e, i) => (i+1) * 1000}>
+  <Anime key={'notCool' + Date.now()} opacity={[0, 1]} translateY={'1em'} delay={(e, i) => (i+1) * 500}>
     <h1>Blog Post</h1>
     <section>
       <p>Upon this, Daggoo, with either hand upon the gunwale to steady his way, swiftly slid aft, and then erecting himself volunteered his lofty shoulders for a pedestal.</p>

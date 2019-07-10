@@ -9,8 +9,8 @@ class Header extends PureComponent {
           to={{
             pathname: '/',
             state: {
-              prev: this.props.location.pathname === '/',
-              location: this.props.location.pathname,
+              prev: this.props.location.pathname !== '/',
+              order: 1,
             },
           }}
           className="pa3 white no-underline ttu tracked"
@@ -22,8 +22,8 @@ class Header extends PureComponent {
             to={{
               pathname: '/home',
               state: {
-                prev: this.props.location.pathname === '/home',
-                location: this.props.location.pathname,
+                prev: this.props.location.pathname !== '/home',
+                order: 2,
               },
             }}
             className="white no-underline pv3 pr3 normal"
@@ -34,8 +34,8 @@ class Header extends PureComponent {
             to={{
               pathname: '/about',
               state: {
-                prev: this.props.location.pathname === '/about',
-                location: this.props.location.pathname,
+                prev: this.props.location.pathname !== '/about',
+                order: 3,
               },
             }}
             className="white no-underline pv3 pr3 normal"
