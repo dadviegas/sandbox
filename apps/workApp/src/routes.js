@@ -1,7 +1,18 @@
+import React, { lazy, Suspense } from "react";
 import Splash from './pages/Splash'
-import Home from './pages/Home'
-import About from './pages/About'
 import Unavailable from './pages/Unavailable'
+import Loader from './components/Loader';
+
+const WaitingComponent = (Component) => {
+  return props => (
+    <Suspense fallback={<Loader />}>
+      <Component {...props} />
+    </Suspense>
+  );
+}
+
+const Home = lazy(() => import('./pages/Home'));
+const About = lazy(() => import('./pages/About'));
 
 export default [
   {
@@ -14,14 +25,14 @@ export default [
   },
   {
     key: 'about',
-    Component: About,
+    Component: WaitingComponent(About),
     props: {
       path: `/about`,
     },
   },
   {
     key: 'home',
-    Component: Home,
+    Component: WaitingComponent(Home),
     props: {
       path: `/home`,
     },

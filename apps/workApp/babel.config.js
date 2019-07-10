@@ -10,6 +10,7 @@ module.exports = (api) => {
   const plugins = [
     '@babel/plugin-proposal-class-properties',
     '@babel/plugin-proposal-export-default-from',
+    '@babel/plugin-syntax-dynamic-import',
   ];
 
   if (isProduction) {

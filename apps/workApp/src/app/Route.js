@@ -8,10 +8,6 @@ import {
   TransitionGroup
 } from 'react-transition-group';
 
-import Home from '../pages/Home';
-import Splash from '../pages/Splash';
-import Unavailable from '../pages/Unavailable';
-
 import Main from '../masterPage/Main';
 
 export default ({ routes }) => (

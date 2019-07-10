@@ -9,7 +9,6 @@ import themes from '../../../styles/theme.scss';
 class Main extends PureComponent {
   render() {
     const { children, location } = this.props;
-
     return (
       <>
         <section className={cn(styles.themeBackground, themes[this.props.theme])}>
