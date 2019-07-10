@@ -13,7 +13,7 @@
   },
   "scripts": {
     "start": "cross-env BABEL_ENV=development webpack-dev-server --hot --inline --env.debug",
-    "dev": "cross-env BABEL_ENV=production webpack --mode=development",
+    "dev": "cross-env BABEL_ENV=development webpack --mode=development",
     "build": "cross-env BABEL_ENV=production webpack --mode=production"
   }
 }

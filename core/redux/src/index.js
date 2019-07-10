@@ -101,6 +101,32 @@ export const storeInit = (elements = [], history) => {
   return storeOptions;
 }
 
+// runSaga is middleware.run function
+// rootSaga is a your root saga for static saagas
+function createSagaInjector(runSaga, rootSaga) {
+  // Create a dictionary to keep track of injected sagas
+  const injectedSagas = new Map();
+
+  const isInjected = key => injectedSagas.has(key);
+
+  const injectSaga = (key, saga) => {
+      // We won't run saga if it is already injected
+      if (isInjected(key)) return;
+
+      // Sagas return task when they executed, which can be used
+      // to cancel them
+      const task = runSaga(saga);
+
+      // Save the task if we want to cancel it in the future
+      injectedSagas.set(key, task);
+  };
+
+  // Inject the root saga as it a staticlly loaded file,
+  injectSaga('root', rootSaga);
+
+  return injectSaga;
+}
+
 export default function configureStore(preloadedState = {}, elements, history) {
   const { reducers, sagas = [], middlewares = []} = storeInit(elements, history);
 
@@ -127,27 +153,30 @@ export default function configureStore(preloadedState = {}, elements, history) {
     composedEnhancer,
   );
 
-  let sagaTask = sagaMiddleware.run(function* rootSaga() {
+  store.asyncReducers = {};
+  store.staticReducers = reducers;
+
+  // https://manukyan.dev/posts/2019-04-15-code-splitting-for-redux-and-optional-redux-saga/
+  store.injectSaga = createSagaInjector(sagaMiddleware.run, function* rootSaga() {
     const flattenSagas = flatten(sagas);
     yield all(flattenSagas.map(fork));
   });
+
+  store.injectReducer = (key, asyncReducer) => {
+    store.asyncReducers[key] = asyncReducer;
+    store.replaceReducer(combineReducers({
+      ...store.staticReducers,
+      ...store.asyncReducers,
+    }));
+  };
 
   if (module.hot) {
     store.replaceLogic = (elements) => {
       const { reducers, sagas = []} = storeInit(elements, history);
       store.replaceReducer(combineReducers(
-        reducers
+        ...store.staticReducers,
+        ...store.asyncReducers,
       ));
-
-      if (sagas.length) {
-        sagaTask.cancel();
-        sagaTask.toPromise.then(() => {
-          sagaTask = sagaMiddleware.run(function* replacedSaga() {
-            const flattenSagas = flatten(sagas);
-            yield all(flattenSagas.map(fork));
-          });
-        });
-      }
     }
   }
 

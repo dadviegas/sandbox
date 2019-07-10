@@ -61,19 +61,12 @@ export default (projConfig = {}) => (env = {}, params) => {
       },
       splitChunks: {
         cacheGroups: {
-          vendor: {
-            chunks: 'initial',
-            name: 'vendor',
-            test: /node_modules/,
-            enforce: true,
-          },
-          // styles: {
-          //   name: 'styles',
-          //   test: /\.s?css$/,
-          //   chunks: 'all',
-          //   enforce: true,
-          // },
-        },
+          commons: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendors',
+            chunks: 'all'
+          }
+        }
       },
     },
     plugins: [
@@ -90,6 +83,10 @@ export default (projConfig = {}) => (env = {}, params) => {
     ],
     module: {
       rules: [
+        {
+          test: /\.md$/,
+          use: 'raw-loader'
+        },
         {
           test: /\.(js|jsx)$/,
           exclude: /node_modules/,

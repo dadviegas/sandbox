@@ -146,3 +146,25 @@ strong {
   }
 }
 
+.markdown-wrapper {
+  pre {
+    margin-top: 10px;
+    padding: 10px;
+    background: #3333337d;
+    border-radius: 10px;
+  }
+
+  .language-mermaid {
+    text-align: center;
+  }
+
+  .language-mermaid {
+    display: block;
+    text-align: center;
+    width: 100%;
+  }
+
+  .text-align-center {
+    text-align: center;
+  }
+}
