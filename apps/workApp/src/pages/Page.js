@@ -1,31 +1,39 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import { withRouter } from 'react-router-dom';
 import themes from '../../styles/theme.scss';
 
-function Page({
-  children,
-  location: {
-    state,
-  },
-  theme
-}) {
-  const cx = cn({
-    page: true,
-    'page--prev': state && state.prev,
-    [themes[theme]]: themes[theme],
-  })
+class Page extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      pathname: this.props.location.pathname,
+    };
+  }
 
-  return (
-    <section
-      className={cx}
-    >
-      <div className="page__inner">
-        {children}
-      </div>
-    </section>
-  );
+  render() {
+    const {
+      children,
+      location: {
+        state,
+      },
+      theme
+    } = this.props;
+    const cx = cn({
+      page: true,
+      'page--prev': this.state.pathname !== this.props.location.pathname,
+      [themes[theme]]: themes[theme],
+    })
+
+    return (
+      <section className={cx} >
+        <div className="page__inner">
+          {children}
+        </div>
+      </section>
+    );
+  }
 }
 
 Page.propTypes = {

@@ -6,14 +6,17 @@
   "author": "David Viegas <dadviegas@hotmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "core-base-redux": "1.0.0",
     "core-base-setup": "1.0.0",
-    "core-webpack-setup": "1.0.0",
     "core-react": "1.0.0",
-    "core-base-redux": "1.0.0"
+    "core-webpack-setup": "1.0.0"
   },
   "scripts": {
     "start": "cross-env BABEL_ENV=development webpack-dev-server --hot --inline --env.debug",
     "dev": "cross-env BABEL_ENV=development webpack --mode=development",
     "build": "cross-env BABEL_ENV=production webpack --mode=production"
+  },
+  "dependencies": {
+    "react-highlighter": "^0.4.3"
   }
 }

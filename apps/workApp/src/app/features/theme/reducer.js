@@ -1,7 +1,7 @@
 import { constants as theme } from './actions';
 
 const initialState = {
-  name: 'carbon',
+  name: 'four',
 };
 
 const map = {
